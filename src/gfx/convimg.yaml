@@ -1,0 +1,37 @@
+palettes:
+  - name: global_palette
+    images: automatic
+
+converts:
+  - name: sprites
+    palette: global_palette
+    images:
+      - music_disc_11.png
+      - music_disc_13.png
+      - music_disc_5.png
+      - music_disc_blocks.png
+      - music_disc_cat.png
+      - music_disc_chirp.png
+      - music_disc_creator.png
+      - music_disc_creator_music_box.png
+      - music_disc_far.png
+      - music_disc_lava_chicken.png
+      - music_disc_mall.png
+      - music_disc_mellohi.png
+      - music_disc_otherside.png
+      - music_disc_pigstep.png
+      - music_disc_precipice.png
+      - music_disc_relic.png
+      - music_disc_stal.png
+      - music_disc_strad.png
+      - music_disc_tears.png
+      - music_disc_wait.png
+      - music_disc_ward.png
+
+outputs:
+  - type: c
+    include-file: gfx.h
+    palettes:
+      - global_palette
+    converts:
+      - sprites

@@ -1,0 +1,6 @@
+*.8xp
+*.lst
+/obj
+/bin
+/.vscode
+.DS_Store
