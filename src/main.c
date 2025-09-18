@@ -34,7 +34,7 @@ gfx_sprite_t *DISCS[] = {
 int main() {
     gfx_Begin();
      gfx_SetPalette(global_palette, sizeof_global_palette, 0);
-     gfx_SetTransparentColor(0x68);
+     gfx_SetTransparentColor(0x00);
 
      /* Use pointers to the existing sprite data; do not malloc or free these
          static sprite pointers that come from the generated .c files. */
