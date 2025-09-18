@@ -32,13 +32,12 @@ gfx_sprite_t *DISCS[] = {
 // LCD height = 240
 
 int main() {
+    srand(rtc_Time());
     gfx_Begin();
-     gfx_SetPalette(global_palette, sizeof_global_palette, 0);
-     gfx_SetTransparentColor(0x00);
+    gfx_SetPalette(global_palette, sizeof_global_palette, 0);
+    gfx_SetTransparentColor(0x00);
 
-     /* Use pointers to the existing sprite data; do not malloc or free these
-         static sprite pointers that come from the generated .c files. */
-     gfx_sprite_t *disc = rand_disc;
+    gfx_sprite_t *disc = rand_disc;
     int x = (rand() % (320 - 16));
     int y = (rand() % (240 - 16));
     int dx = 1;
@@ -81,8 +80,6 @@ int main() {
         }
     }
 
-    /* The DISCS array and the individual sprite pointers are static/compiled-in
-       and must not be freed. Nothing to free here. */
     gfx_End();
     return 0;
 }
