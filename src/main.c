@@ -34,16 +34,18 @@
 
 int main() {
     gfx_Begin();
-    gfx_SetDrawBuffer();
+    gfx_SetPalette(global_palette, sizeof_global_palette, 0);
     gfx_SetTransparentColor(0x68);
-    gfx_FillScreen(0x00);
-
+    
     gfx_sprite_t *disc = malloc(sizeof(gfx_sprite_t) + DISC_SIZE * DISC_SIZE);
     disc = music_disc_otherside; //rand_disc;
     int x = (rand() % (320 - 16));
     int y = (rand() % (240 - 16));
     int dx = 1;
     int dy = 1;
+    
+    gfx_SetDrawBuffer();
+    gfx_FillScreen(0x00);
     
     while (!os_GetCSC()) {
         gfx_FillScreen(0x00);
