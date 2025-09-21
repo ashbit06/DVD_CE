@@ -1,6 +1,8 @@
 #include <tice.h>
 #include <graphx.h>
 #include <gfx/gfx.h>
+#include <fileioc.h>
+#include <debug.h>
 
 #define rand_disc DISCS[rand() % 21]
 #define DISC_SIZE 48
@@ -36,12 +38,30 @@ int main() {
     gfx_Begin();
     gfx_SetPalette(global_palette, sizeof_global_palette, 0);
     gfx_SetTransparentColor(0x00);
+    gfx_SetTextBGColor(0x00);
+    gfx_SetTextFGColor(0x6C);
+    gfx_SetTextScale(1, 1);
 
     gfx_sprite_t *disc = rand_disc;
     int x = (rand() % (320 - 16));
     int y = (rand() % (240 - 16));
     int dx = 1 * (rand() % 2 ? 1 : -1);
     int dy = 1 * (rand() % 2 ? 1 : -1);
+
+    int allTimeCornerHits = 0;
+
+    ti_var_t file = ti_Open("DVD_CE", "r");
+    if (file) {
+        ti_Read(&allTimeCornerHits, sizeof(allTimeCornerHits), 1, file);
+        ti_Close(file);
+    } else {
+        file = ti_Open("DVD_CE", "w");
+        if (file) {
+            ti_Write(&allTimeCornerHits, sizeof(allTimeCornerHits), 1, file);
+            ti_Close(file);
+        }
+    }
+    dbg_printf("all-time corner hits: %d\n", allTimeCornerHits);
     
     gfx_SetDrawBuffer();
     gfx_FillScreen(0x00);
@@ -49,6 +69,8 @@ int main() {
     while (!os_GetCSC()) {
         gfx_FillScreen(0x00);
         gfx_ScaledTransparentSprite_NoClip(disc, x, y, 3, 3);
+        gfx_SetTextXY(0, 232);
+        gfx_PrintInt(allTimeCornerHits, 1);
         gfx_SwapDraw();
         
         x += dx;
@@ -78,6 +100,18 @@ int main() {
             disc = rand_disc;
 
         }
+
+        if ((x == 0 || x == (320 - DISC_SIZE)) && (y == 0 || y == (240 - DISC_SIZE))) {
+            allTimeCornerHits++;
+            dbg_printf("hit\n");
+        }
+    }
+
+    // save all-time completed
+    file = ti_Open("DVD_CE", "w");
+    if (file) {
+        ti_Write(&allTimeCornerHits, sizeof(allTimeCornerHits), 1, file);
+        ti_Close(file);
     }
 
     gfx_End();
