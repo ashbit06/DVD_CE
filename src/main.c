@@ -40,8 +40,8 @@ int main() {
     gfx_sprite_t *disc = rand_disc;
     int x = (rand() % (320 - 16));
     int y = (rand() % (240 - 16));
-    int dx = 1;
-    int dy = 1;
+    int dx = 1 * (rand() % 2 ? 1 : -1);
+    int dy = 1 * (rand() % 2 ? 1 : -1);
     
     gfx_SetDrawBuffer();
     gfx_FillScreen(0x00);
