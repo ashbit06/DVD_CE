@@ -5,7 +5,5 @@
 /.*
 /tools
 .DS_Store
-/src/gfx/music_disc_*.c
-/src/gfx/music_disc_*.h
-/src/gfx/gfx.h
-/src/gfx/global_palette.*
+/src/gfx/*.c
+/src/gfx/*.h
