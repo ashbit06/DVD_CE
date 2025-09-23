@@ -2,7 +2,7 @@ NAME = DVD_CE
 ICON = icon.png
 DESCRIPTION = "The classic DVD screensaver, now for the CE!"
 
-COMPRESSED = NO
+COMPRESSED = YES
 ARCHIVED = YES
 
 MAKE_GFX = cd $(GFXDIR) && $(CONVIMG)
